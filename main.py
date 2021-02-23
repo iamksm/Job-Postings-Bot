@@ -5,8 +5,14 @@ from bs4 import BeautifulSoup
 import requests
 from discord.ext import commands
 from keep_alive import keep_alive
+# import lxml
 
 client = commands.Bot(command_prefix="!")
+
+try:
+  import lxml
+except:
+  os.system('pip install lxml')
 
 @client.event
 async def on_ready():
@@ -18,6 +24,7 @@ async def on_ready():
     print("Bot's Ready")
 
     while True:
+        # os.system('pip install lxml')
         dev_job_channel = discord.utils.get(client.get_all_channels(), name="💼-dev-job-opportunities")
 
         html_text = requests.get('https://www.fuzu.com/categories/it-software').text
@@ -35,7 +42,7 @@ async def on_ready():
             embed.add_field(name=title, value=more_info, inline=False)
 
         time_wait = 10080
-        embed.set_footer(text=f"This refreshes every 7 days")
+        embed.set_footer(text="This refreshes every 7 days")
         await dev_job_channel.send(embed=embed)
         
         print(f'Waiting {time_wait} minutes...')
