@@ -44,7 +44,7 @@ async def jobs(ctx, skill, count=10):
                 )
             else:
                 job_title = "None"
-            # pdb.set_trace()
+
             if (
                 job.find(
                     "img",
@@ -52,12 +52,10 @@ async def jobs(ctx, skill, count=10):
                 )
                 is not None
             ):
-
                 pic = job.find(
                     "img",
                     class_="artdeco-entity-image artdeco-entity-image--square-4 lazy-loaded",
                 )["data-ghost-url"]
-
             else:
                 pic = "https://static-exp1.licdn.com/sc/h/9a9u41thxt325ucfh5z8ga4m8"
 
@@ -85,9 +83,9 @@ async def jobs(ctx, skill, count=10):
                 ]
             else:
                 posted = "None"
+
             if job.find("a", class_="base-card__full-link") is not None:
                 link = job.find("a", class_="base-card__full-link")["href"]
-
             else:
                 link = "None"
 
@@ -126,9 +124,10 @@ async def jobs(ctx, skill, count=10):
                 value=link,
                 inline=False,
             )
-
             embed.set_footer(text=f"{skill} Jobs on LinkedIn | Result No. {count}")
+
             await ctx.send(embed=embed)
+
             count = count - 1
 
 
